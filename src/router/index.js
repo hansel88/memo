@@ -1,17 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import VueResource from 'vue-resource'
+import GameArea from '@/components/GameArea'
 
 Vue.use(Router);
-Vue.use(VueResource);
 
 export default new Router({
+  mode: 'history',
+  base: __dirname,
   routes: [
     {
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/play',
+      name: 'gamearea',
+      component: GameArea
     }
   ]
 })

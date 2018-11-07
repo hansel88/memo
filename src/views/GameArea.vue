@@ -2,7 +2,7 @@
   <div>
     <h1>here comes gamearea</h1>
     <div v-for="tile in tiles">
-      <memotile></memotile>
+      <memotile :color="tile.color"></memotile>
     </div>
     <!--<memotile></memotile>-->
 
@@ -30,8 +30,39 @@
       'memotile': Memotile
     },
     created: function () {
-      this.tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-     
+
+      let tile = {
+        color: 'orange'
+      };
+
+      let tile2 = {
+        color: 'blue'
+      };
+
+      let tile3 = {
+        color: 'green'
+      }
+      this.tiles = [];
+      this.tiles.push(tile);
+      this.tiles.push(tile2);
+      this.tiles.push(tile3);
+      this.tiles.push(tile);
+      this.tiles.push(tile2);
+      this.tiles.push(tile3);
+      this.tiles.push(tile);
+      this.tiles.push(tile2);
+      this.tiles.push(tile2);
+      this.tiles.push(tile3);
+
+      var array = this.tiles;
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+
+      this.tiles = array;
     },
     mounted: function () {
       $('.flip').click(function () {

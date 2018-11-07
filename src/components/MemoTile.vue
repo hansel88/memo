@@ -1,10 +1,11 @@
 <template>
   <div class="container ">
     <div class="flip memotile">
-      <div class="card green">
+      <div :class="['card', color]">
         <div class="face front">
           <div class="well well-sm inner"> Front</div>
         </div>
+
         <div class="face back">
           <div class="well well-sm inner"> Back</div>
         </div>
@@ -18,8 +19,14 @@
   export default {
     name: 'memotile',
     props: {
-      flipped: 'test',
-      color: 'green'
+      flipped : {
+        type: Boolean,
+        default: false
+      },
+      color: {
+        type: String,
+        default: 'green'
+      }
     },
     data() {
       return {

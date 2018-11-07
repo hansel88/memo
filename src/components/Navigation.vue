@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
+    <router-link to="/" class="navbar-brand">Memo</router-link>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -15,10 +15,10 @@
           <router-link to="/play" class="nav-link">Play</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <router-link to="/highscores" class="nav-link">Highscores</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <router-link to="/about" class="nav-link">About</router-link>
         </li>
       </ul>
     </div>

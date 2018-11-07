@@ -8,10 +8,11 @@
 
 <script>
   import Navigation from './components/navigation'
+  import Memotile from './components/memotile';
   export default {
     name: 'App',
     components: {
-      Navigation
+      Navigation, Memotile
     }
 }
 </script>

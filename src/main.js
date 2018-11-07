@@ -3,6 +3,8 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 
+//import 'expose?$!expose-loader?jQuery!jquery'
+
 
 Vue.use(VueResource);
 

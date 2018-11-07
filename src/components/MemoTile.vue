@@ -25,11 +25,6 @@
       return {
 
       }
-    },
-    mounted: function () {
-      $('.flip').click(function () {
-        $(this).find('.card').toggleClass('flipped');
-      });
     }
   }
 

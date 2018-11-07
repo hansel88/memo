@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1>here comes gamearea</h1>
-    <memotile></memotile>
+    <div v-for="tile in tiles">
+      <memotile></memotile>
+    </div>
+    <!--<memotile></memotile>-->
 
   </div>
 
@@ -27,7 +30,13 @@
       'memotile': Memotile
     },
     created: function () {
-      this.tiles = [1, 2, 3];
+      this.tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+     
+    },
+    mounted: function () {
+      $('.flip').click(function () {
+        $(this).find('.card').toggleClass('flipped');
+      });
     }
   }
 

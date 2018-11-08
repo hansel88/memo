@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gamearea col-xs-6 col-md-12">
     <h1>here comes gamearea</h1>
     <div v-for="tile in tiles">
       <memotile :color="tile.color"></memotile>
@@ -30,47 +30,57 @@
       'memotile': Memotile
     },
     created: function () {
-
-      let tile = {
-        color: 'orange'
-      };
-
-      let tile2 = {
-        color: 'blue'
-      };
-
-      let tile3 = {
-        color: 'green'
-      }
-      this.tiles = [];
-      this.tiles.push(tile);
-      this.tiles.push(tile2);
-      this.tiles.push(tile3);
-      this.tiles.push(tile);
-      this.tiles.push(tile2);
-      this.tiles.push(tile3);
-      this.tiles.push(tile);
-      this.tiles.push(tile2);
-      this.tiles.push(tile2);
-      this.tiles.push(tile3);
-
-      var array = this.tiles;
-      for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-      }
-
-      this.tiles = array;
+      this.tiles = generateTiles(1);
     },
     mounted: function () {
       $('.flip').click(function () {
         $(this).find('.card').toggleClass('flipped');
       });
+
     }
   }
 
+  var rearrangeArray = function (array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
+  var getRandomColor = function () {
+    var colors = ['green', 'orange', 'blue'];
+    var index = Math.floor((Math.random() * 3));
+    return colors[index];
+  }
+
+  var generateTiles = function (level) {
+
+    let tiles = [];
+    var number;
+
+    switch (level) {
+      case 1: number = 9; break;
+      case 2: number = 10; break;
+      case 3: number = 12; break;
+      default: number = 10; break;
+    };
+
+    for (var i = 0; i < number; i++) {
+      let tile = {
+        color: getRandomColor()
+      };
+      let siblingTile = {
+        color: getRandomColor()
+      };
+
+      tiles.push(tile);
+      tiles.push(siblingTile);
+    }
+    return rearrangeArray(tiles);
+  }
 
 </script>
 

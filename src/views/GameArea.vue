@@ -20,7 +20,7 @@
 
   var disableClick = false;
 
-  var delay = 3000;
+  var delay = 3000; //dependent on level? :)
 
   import Memotile from '../components/memotile';
   export default {

@@ -45,11 +45,6 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #tits {
-    height: 500px;
-    width: 200px;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+
 </style>
 

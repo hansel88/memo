@@ -1,8 +1,8 @@
 <template>
   <div class="gamearea col-xs-6 col-md-12">
     <h1>here comes gamearea</h1>
-    <div v-for="tile in tiles">
-      <memotile :color="tile.color" :imageUrl="tile.image"></memotile>
+    <div v-for="tile in tiles" v-on:click="checkTile(tile.id)">
+      <memotile :color="tile.color" :imageUrl="tile.image" :class="tile.class"></memotile>
     </div>
     <!--<memotile></memotile>-->
 
@@ -15,6 +15,7 @@
 
 
   //$('#tits').html("<p>faen</p>");
+  var lastPicked = 0;
 
   import Memotile from '../components/memotile';
   export default {
@@ -33,11 +34,47 @@
       this.tiles = generateTiles(1);
     },
     mounted: function () {
+      /*
       $('.flip').click(function () {
         $(this).find('.card').toggleClass('flipped');
       });
+      */
+    },
+    methods: {
+      checkTile: function (id) {
+        console.log('clicked: ', id);
 
+        if (lastPicked == 0) {
+          lastPicked = id;
+          $('.memotile'+ id).each(function () {
+            $(this).find('.card').toggleClass('flipped');
+          });
+        }
+        else {
+          if (lastPicked == id) {
+            console.log('correct');
+            success(id);
+          }
+          else {
+            hideTile(id);
+            hideTile(lastPicked);
+          }
+        }
+      }
     }
+  }
+
+  var hideTile = function (id) {
+    console.log('hideTile called');
+    $('.memotile' + id).click(function () {
+      $(this).find('.card').toggleClass('flipped');
+    });
+  }
+
+  var success = function (id) {
+    $('.memotile' + id).each(function () {
+      $(this).addClass("correct");
+    });
   }
 
   var rearrangeArray = function (array) {
@@ -87,12 +124,14 @@
       let tile = {
         color: getRandomColor(),
         image: imageUrls[i],
-        pair: i
+        id: i,
+        class: 'memotile' + i
       };
       let siblingTile = {
         color: getRandomColor(),
         image: imageUrls[i],
-        pair: i
+        id: i,
+        class: 'memotile' + i
       };
 
       tiles.push(tile);

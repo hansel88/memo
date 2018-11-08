@@ -1,8 +1,8 @@
 <template>
   <div class="gamearea col-xs-6 col-md-12">
     <h1>here comes gamearea</h1>
-    <div v-for="tile in tiles" v-on:click="checkTile(tile.id)">
-      <memotile :color="tile.color" :imageUrl="tile.image" :class="tile.class"></memotile>
+    <div v-for="tile in tiles" :id="tile.id" v-on:click="checkTile(tile.id, tile.pair)">
+      <memotile :color="tile.color" :imageUrl="tile.image" :class="tile.pair"></memotile>
     </div>
     <!--<memotile></memotile>-->
 
@@ -15,7 +15,12 @@
 
 
   //$('#tits').html("<p>faen</p>");
-  var lastPicked = 0;
+  var lastPickedPair = null;
+  var lastPickedId = null;
+
+  var disableClick = false;
+
+  var delay = 3000;
 
   import Memotile from '../components/memotile';
   export default {
@@ -41,38 +46,68 @@
       */
     },
     methods: {
-      checkTile: function (id) {
-        console.log('clicked: ', id);
+      checkTile: function (id, pair) {
 
-        if (lastPicked == 0) {
-          lastPicked = id;
-          $('.memotile'+ id).each(function () {
-            $(this).find('.card').toggleClass('flipped');
-          });
+        if (disableClick)
+          return;
+
+        disableClick = true;
+
+        console.log('clicked, id: ', id);
+        console.log('clicked, pair: ', pair);
+
+        if($('#' + id).hasClass("correct")){
+          console.log('was correct');
+          return;
+        }
+
+        if (lastPickedId == null) {
+          lastPickedId = id;
+          lastPickedPair = pair;
+          showTile(id);
+          disableClick = false;
         }
         else {
-          if (lastPicked == id) {
+          if (lastPickedPair == pair) {
             console.log('correct');
-            success(id);
+            showTile(id);
+            success(pair);
+            resetLastPicked();
+            disableClick = false;
           }
           else {
-            hideTile(id);
-            hideTile(lastPicked);
+            showTile(id);
+            hideTile(id, delay)
+            hideTile(lastPickedId, delay);
+            resetLastPicked(); 
+            setTimeout(function () {
+              disableClick = false;
+            }, delay);
           }
         }
       }
     }
   }
 
-  var hideTile = function (id) {
-    console.log('hideTile called');
-    $('.memotile' + id).click(function () {
-      $(this).find('.card').toggleClass('flipped');
-    });
+  var resetLastPicked = function () {
+    lastPickedId = null;
+    lastPickedPair = null;
   }
 
-  var success = function (id) {
-    $('.memotile' + id).each(function () {
+  var hideTile = function (id, delay) {
+    console.log('hideTile called');
+    setTimeout(function () {
+      $('#' + id).find('.card').removeClass('flipped');
+    }, delay);
+  }
+
+  var showTile = function (id) {
+    console.log('show called');
+    $('#' + id).find('.card').addClass('flipped');
+  }
+
+  var success = function (pair) {
+    $('.' + pair).each(function () {
       $(this).addClass("correct");
     });
   }
@@ -125,13 +160,13 @@
         color: getRandomColor(),
         image: imageUrls[i],
         id: i,
-        class: 'memotile' + i
+        pair: 'memotile' + i
       };
       let siblingTile = {
         color: getRandomColor(),
         image: imageUrls[i],
-        id: i,
-        class: 'memotile' + i
+        id: i + 'sibling',
+        pair: 'memotile' + i
       };
 
       tiles.push(tile);

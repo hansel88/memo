@@ -2,7 +2,7 @@
   <div class="gamearea col-xs-6 col-md-12">
     <h1>here comes gamearea</h1>
     <div v-for="tile in tiles">
-      <memotile :color="tile.color" ></memotile>
+      <memotile :color="tile.color" :imageUrl="tile.image"></memotile>
     </div>
     <!--<memotile></memotile>-->
 
@@ -58,7 +58,7 @@
 
   var getRandomImageUrls = function (size, level) {
     var urls = [];
-    var baseUrl = '../assets/images/diff' + level + '/';
+    var baseUrl = 'http://htodap.com/memo/tiles/diff' + level + '/';
 
 
     for (let i = 1; i <= size; i++) {
@@ -86,11 +86,13 @@
     for (var i = 0; i < number; i++) {
       let tile = {
         color: getRandomColor(),
-        image: imageUrls[i]
+        image: imageUrls[i],
+        pair: i
       };
       let siblingTile = {
         color: getRandomColor(),
-        image: imageUrls[i]
+        image: imageUrls[i],
+        pair: i
       };
 
       tiles.push(tile);

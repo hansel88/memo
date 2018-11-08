@@ -8,7 +8,7 @@
 
         <div class="face back">
           <!--<img class="well well-sm inner" :src="require('../assets/images/diff1/1.png')"> </img>-->
-          <!--<img class="well well-sm inner" :src='require('../assets/images/diff1/1.png')'></img>-->
+
           <img class="well well-sm inner" :src="imageUrl"></img>
         </div>
 

@@ -5,6 +5,15 @@
   width: 160px;
   margin: 10px;
   float: left;
+
+  img {
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    padding: 1px 1px 0 0;
+    border-radius: 5px;
+  }
 }
 
 .memotile:hover {
@@ -43,7 +52,13 @@
 .flip .card.flipped {
   -webkit-transform: rotatex(-180deg);
   transform: rotatex(-180deg);
-  background-color: red;
+
+
+
+  .back {
+
+    //background-color: red;
+  }
 }
 
 
@@ -66,5 +81,5 @@
 }
 
 .inner {
-  margin: 0px !important;
+ // margin: 0px !important;
 }

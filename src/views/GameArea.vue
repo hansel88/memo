@@ -2,7 +2,7 @@
   <div class="gamearea col-xs-6 col-md-12">
     <h1>here comes gamearea</h1>
     <div v-for="tile in tiles">
-      <memotile :color="tile.color"></memotile>
+      <memotile :color="tile.color" ></memotile>
     </div>
     <!--<memotile></memotile>-->
 
@@ -56,6 +56,19 @@
     return colors[index];
   }
 
+  var getRandomImageUrls = function (size, level) {
+    var urls = [];
+    var baseUrl = '../assets/images/diff' + level + '/';
+
+
+    for (let i = 1; i <= size; i++) {
+      let url = baseUrl + i + '.png';
+      urls.push(url);
+    }
+
+    return urls;
+  }
+
   var generateTiles = function (level) {
 
     let tiles = [];
@@ -68,17 +81,23 @@
       default: number = 10; break;
     };
 
+    var imageUrls = getRandomImageUrls(number, 1);
+
     for (var i = 0; i < number; i++) {
       let tile = {
-        color: getRandomColor()
+        color: getRandomColor(),
+        image: imageUrls[i]
       };
       let siblingTile = {
-        color: getRandomColor()
+        color: getRandomColor(),
+        image: imageUrls[i]
       };
 
       tiles.push(tile);
       tiles.push(siblingTile);
     }
+
+    console.log(tiles)
     return rearrangeArray(tiles);
   }
 

@@ -56,8 +56,9 @@
         console.log('clicked, id: ', id);
         console.log('clicked, pair: ', pair);
 
-        if($('#' + id).hasClass("correct")){
+        if($('#' + id).hasClass("correct") || lastPickedId == id){
           console.log('was correct');
+          disableClick = false;
           return;
         }
 
